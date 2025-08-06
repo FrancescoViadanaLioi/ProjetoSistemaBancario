@@ -13,7 +13,7 @@ namespace ContaBanco.Input
             while (true)
             {
                 string input = RecursosUniversais.PedirEntrada("Digite o seu nome: ");
-                if (input != null && ValidacoesDeDados.ValidarNome(input)) return input;
+                if (ValidacoesDeDados.ValidarNome(input)) return input;
                 ConsoleUI.ExibirErro("Verifique se o nome tem somente letras e mais de um caracter.");
             }
         }

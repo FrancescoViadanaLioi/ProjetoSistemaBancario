@@ -8,18 +8,17 @@ namespace Validations
     {
         public static bool ValidarNome(string nome)
         {
-            if (string.IsNullOrWhiteSpace(nome)) return false;
             nome = nome.Trim();
             string padrao = @"^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ -][A-Za-zÀ-ÖØ-öø-ÿ]+)*$";
-            return nome.Length > 1 && Regex.IsMatch(nome, padrao);
+            return !string.IsNullOrWhiteSpace(nome) && nome.Length > 1 && Regex.IsMatch(nome, padrao);
         }
         public static bool ValidarPIN(string senha)
         {
             return Regex.IsMatch(senha ?? "", @"^\d{4}$");
         }
-        public static bool TryParseSaldo(string? input, out double saldo)
+        public static bool TryParseValorPositivo(string? input, out double valorPositivo)
         {
-            return double.TryParse(input, CultureInfo.InvariantCulture, out saldo) && saldo >= 0;
+            return double.TryParse(input, CultureInfo.InvariantCulture, out valorPositivo) && valorPositivo >= 0;
         }
         public static bool ValidarSaldoPositivo(double saldo, out double saldoValidado)
         {
