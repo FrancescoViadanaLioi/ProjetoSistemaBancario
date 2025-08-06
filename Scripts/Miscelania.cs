@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Miscelania
 {
@@ -6,7 +7,7 @@ namespace Miscelania
     {
         public static void Exibir(Mensagem mensagem)
         {
-            string prefixo = $"{mensagem.Tipo.ToString().ToUpper()}: ";
+            string prefixo = $"{mensagem.Tipo.ToString().ToUpper()}:";
             Console.WriteLine($"{prefixo} {mensagem.Conteudo}");
 
             if (mensagem.EsperarTecla)
@@ -18,6 +19,21 @@ namespace Miscelania
             {
                 Console.Clear();
             }
+        }
+        public static void ExibirAlerta(string conteudo)
+        {
+            var msg = new Mensagem(conteudo, tipo: TipoMensagem.Alerta, esperarTecla: true, limparConsole: false);
+            Exibir(msg);
+        }
+        public static void ExibirErro(string conteudo)
+        {
+            var msg = new Mensagem(conteudo, tipo: TipoMensagem.Erro, esperarTecla: true, limparConsole: true);
+            Exibir(msg);
+        }
+        public static void ExibirSucesso(string conteudo)
+        {
+            var msg = new Mensagem(conteudo, tipo: TipoMensagem.Sucesso, esperarTecla: false, limparConsole: false);
+            Exibir(msg);
         }
     }
 }
