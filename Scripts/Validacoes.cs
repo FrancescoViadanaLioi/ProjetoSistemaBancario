@@ -17,10 +17,27 @@ namespace Validations
         {
             return Regex.IsMatch(senha ?? "", @"^\d{4}$");
         }
+        public static bool TryParseSaldo(string? input, out double saldo)
+        {
+            return double.TryParse(input, CultureInfo.InvariantCulture, out saldo) && saldo >= 0;
+        }
+        public static bool ValidarSaldoPositivo(double saldo, out double saldoValidado)
+        {
+            saldoValidado = saldo;
+            return saldo >= 0;
+        }
         public static bool ValidarSaque(double saque, out double saqueValidado)
         {
-            saqueValidado = saque;
-            return saqueValidado > 1;
+            return ValidarValorPositivo(saque, out saqueValidado);
+        }
+        public static bool ValidarDeposito(double deposito, out double depositoValidado)
+        {
+            return ValidarValorPositivo(deposito, out depositoValidado);
+        }
+        private static bool ValidarValorPositivo(double valor, out double valorValidado)
+        {
+            valorValidado = valor;
+            return valor > 0;
         }
     }
 }
